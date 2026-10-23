@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="ka"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STUDIA — ადმინისტრირება</title><link rel="stylesheet" href="style.css"></head>
+<body><div class="glow g1"></div><div class="glow g2"></div><header class="top"><a class="brand" href="index.html"><span class="brand-mark">S</span> STUDIA</a><span class="tag">ADMIN CONSOLE</span><a class="admin-link" href="index.html">← საიტზე</a></header>
+<main class="admin-wrap"><section class="panel admin-panel">
+<div id="adminLogin"><div class="eyebrow"><span class="dot"></span> დაცული სივრცე</div><h1 class="admin-title">ადმინ<span>პანელი</span></h1><p class="muted">შეიყვანე Cloudflare Worker-ში დაყენებული ადმინისტრატორის პაროლი.</p><form id="adminLoginForm"><label>ადმინის პაროლი<input type="password" name="password" required autocomplete="current-password"></label><button class="primary" type="submit">შესვლა →</button><div class="notice" id="adminLoginNotice" role="status"></div></form></div>
+<div id="adminDashboard" class="hidden">
+<div class="dash-head"><div><div class="eyebrow"><span class="dot"></span> მართვის პანელი</div><h1 class="admin-title">მოთხოვნები</h1></div><button class="secondary" id="adminLogout">გასვლა</button></div>
+<div class="stats"><div><strong id="pendingCount">0</strong><span>მოლოდინში</span></div><div><strong id="approvedCount">0</strong><span>დამტკიცებული</span></div><div><strong id="rejectedCount">0</strong><span>უარყოფილი</span></div></div>
+<div class="section-head"><h2>რეგისტრაციები</h2><button class="secondary small" id="refreshBtn">განახლება ↻</button></div><div id="requests" class="request-list"></div>
+<div class="section-head"><h2>სასწავლო მასალის დამატება</h2></div><p class="muted">ჩასვი ფაილის საჯარო ბმული (მაგალითად, GitHub-ში ატვირთული PDF-ის ბმული). ეს ვერსია ფაილს პირდაპირ არ ტვირთავს.</p>
+<form id="materialForm" class="material-form"><label>მასალის სათაური<input name="title" required maxlength="160" placeholder="მაგ. საქართველოს ისტორია — კონსპექტი"></label><label>ბმული<input name="url" type="url" required maxlength="1000" placeholder="https://..."></label><label>აღწერა<textarea name="description" maxlength="500" placeholder="მოკლე აღწერა (არასავალდებულო)"></textarea></label><button class="primary" type="submit">მასალის დამატება +</button><div class="notice" id="materialNotice" role="status"></div></form>
+<h2 class="section-head">დამატებული მასალები</h2><div id="adminMaterials" class="materials"></div>
+</div></section></main><footer>STUDIA · ADMIN CONSOLE</footer><script src="config.js"></script><script src="admin.js"></script></body></html>

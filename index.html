@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STUDIA — სასწავლო სივრცე</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="glow g1"></div><div class="glow g2"></div>
+<header class="top"><a class="brand" href="index.html"><span class="brand-mark">S</span> STUDIA</a><span class="tag">YOUR LEARNING SPACE</span><a class="admin-link" href="admin.html">ადმინი ↗</a></header>
+<main class="hero">
+  <section class="intro"><div class="eyebrow"><span class="dot"></span> ცოდნა იწყება აქ</div>
+  <h1>ისწავლე მეტი.<br><span>მიაღწიე მეტს.</span></h1>
+  <p class="lead">შენი სასწავლო მასალები, კონსპექტები და საგანმანათლებლო სივრცე — ერთ ადგილას.</p>
+  <div class="feature-row"><span>✦ პირადი წვდომა</span><span>✦ სასწავლო რესურსები</span><span>✦ ადმინის დადასტურება</span></div>
+  </section>
+  <section class="panel">
+    <div class="tabs"><button class="tab active" data-tab="register">რეგისტრაცია</button><button class="tab" data-tab="login">შესვლა</button></div>
+    <form id="registerForm" class="auth-form">
+      <h2>შექმენი ანგარიში</h2><p class="muted">ანგარიში აქტიურდება ადმინის დადასტურების შემდეგ.</p>
+      <label>სახელი<input name="firstName" autocomplete="given-name" required maxlength="80" placeholder="შენი სახელი"></label>
+      <label>გვარი<input name="lastName" autocomplete="family-name" required maxlength="80" placeholder="შენი გვარი"></label>
+      <label>ელფოსტა<input name="email" type="email" autocomplete="email" required maxlength="254" placeholder="name@example.com"></label>
+      <label>პაროლი<input name="password" type="password" autocomplete="new-password" required minlength="10" maxlength="128" placeholder="მინიმუმ 10 სიმბოლო"></label>
+      <button class="primary" type="submit">დაშვების მოთხოვნა <span>→</span></button><div class="notice" id="registerNotice" role="status"></div>
+    </form>
+    <form id="loginForm" class="auth-form hidden">
+      <h2>კეთილი დაბრუნება</h2><p class="muted">შედი დამტკიცებული ანგარიშით.</p>
+      <label>ელფოსტა<input name="email" type="email" autocomplete="email" required></label>
+      <label>პაროლი<input name="password" type="password" autocomplete="current-password" required></label>
+      <button class="primary" type="submit">შესვლა <span>→</span></button><div class="notice" id="loginNotice" role="status"></div>
+    </form>
+    <section id="studentArea" class="hidden">
+      <h2>სასწავლო სივრცე</h2><p class="muted" id="welcome"></p><button class="secondary" id="logoutBtn">გასვლა</button>
+      <h3>მასალები</h3><div id="materials" class="materials"></div>
+    </section>
+  </section>
+</main>
+<footer>© STUDIA · შექმნილი სწავლისთვის</footer>
+<script src="config.js"></script><script src="app.js"></script>
+</body></html>
