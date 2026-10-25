@@ -1,0 +1,60 @@
+
+<!doctype html>
+<html lang="ka">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STUDIA — დეშბორდი</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="studia-pages.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">S</span> STUDIA
+    </a>
+    <span class="tag">YOUR PROGRESS</span>
+    <a class="admin-link" href="quiz.html">ქვიზები ↗</a>
+  </header>
+
+  <main class="page-wrap">
+    <div class="page-nav">
+      <a class="back-link" href="index.html">
+        ← სასწავლო სივრცეში დაბრუნება
+      </a>
+      <span class="pill">PERSONAL OVERVIEW</span>
+    </div>
+
+    <p class="page-eyebrow">YOUR LEARNING JOURNEY</p>
+    <h1 class="page-title">
+      პროგრესის დეშბორდი<span style="color:var(--gold)">.</span>
+    </h1>
+    <p class="page-sub">
+      შენი ქვიზების შედეგები და პროგრესი ერთ სივრცეში.
+    </p>
+
+    <div id="dashboardMetrics" class="metrics"></div>
+
+    <section class="page-panel">
+      <h2 style="margin-top:0">ბოლო შედეგები</h2>
+      <div id="attemptList" class="small-muted">
+        მონაცემები იტვირთება…
+      </div>
+
+      <div class="page-actions">
+        <a class="page-button" href="quiz.html">
+          ქვიზების გაგრძელება →
+        </a>
+        <a class="page-button secondary" href="index.html">
+          მასალებზე დაბრუნება
+        </a>
+      </div>
+    </section>
+
+    <div id="dashNotice" class="notice"></div>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
