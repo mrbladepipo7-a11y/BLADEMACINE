@@ -1,0 +1,53 @@
+
+<!doctype html>
+<html lang="ka">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STUDIA — ქვიზები</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="studia-pages.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">S</span> STUDIA
+    </a>
+    <span class="tag">PRACTICE · QUIZZES</span>
+    <a class="admin-link" href="dashboard.html">დეშბორდი ↗</a>
+  </header>
+
+  <main class="page-wrap">
+    <div class="page-nav">
+      <a class="back-link" href="index.html">
+        ← სასწავლო სივრცეში დაბრუნება
+      </a>
+      <span class="pill">STUDIA LEARN</span>
+    </div>
+
+    <p class="page-eyebrow">TEST YOUR KNOWLEDGE</p>
+    <h1 class="page-title">
+      ქვიზების სივრცე<span style="color:var(--gold)">.</span>
+    </h1>
+    <p class="page-sub">
+      აირჩიე ქვიზი, უპასუხე კითხვებს და ნახე შენი შედეგი.
+    </p>
+
+    <section id="quizList" class="page-grid">
+      <div class="empty-state">ქვიზები იტვირთება…</div>
+    </section>
+
+    <section
+      id="quizRunner"
+      class="page-panel"
+      hidden
+      style="margin-top:20px"
+    ></section>
+
+    <div id="quizNotice" class="notice"></div>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="quiz.js"></script>
+</body>
+</html>
