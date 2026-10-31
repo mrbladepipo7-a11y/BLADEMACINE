@@ -33,6 +33,10 @@
       <div class="studia-feature__footer"><span class="studia-feature__footer-mark">✧</span>
         <span><strong>ერთი სივრცე — მეტი ფოკუსი.</strong> ეს ვიზუალური დამატებაა; ქვიზებისა და პროგრესის სრულფასოვანი ფუნქციები ცალკე უნდა დაემატოს.</span>
       </div>`;
+    hub.querySelector(".studia-feature--quiz").style.cursor = "pointer";
+    hub.querySelector(".studia-feature--dash").style.cursor = "pointer";
+    hub.querySelector(".studia-feature--quiz").addEventListener("click", () => { if (sessionStorage.getItem("studiaToken")) location.href = "quiz.html"; });
+    hub.querySelector(".studia-feature--dash").addEventListener("click", () => { if (sessionStorage.getItem("studiaToken")) location.href = "dashboard.html"; });
     const heading = Array.from(area.querySelectorAll("h3")).find(el => el.textContent.trim() === "მასალები");
     if (heading) area.insertBefore(hub, heading); else area.appendChild(hub);
   };
