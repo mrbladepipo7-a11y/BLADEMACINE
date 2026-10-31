@@ -10,7 +10,7 @@
 <div class="section-head"><h2>სასწავლო მასალის დამატება</h2></div><p class="muted">ჩასვი ფაილის საჯარო ბმული (მაგალითად, GitHub-ში ატვირთული PDF-ის ბმული). ეს ვერსია ფაილს პირდაპირ არ ტვირთავს.</p>
 <form id="materialForm" class="material-form"><label>მასალის სათაური<input name="title" required maxlength="160" placeholder="მაგ. საქართველოს ისტორია — კონსპექტი"></label><label>ბმული<input name="url" type="url" required maxlength="1000" placeholder="https://..."></label><label>აღწერა<textarea name="description" maxlength="500" placeholder="მოკლე აღწერა (არასავალდებულო)"></textarea></label><button class="primary" type="submit">მასალის დამატება +</button><div class="notice" id="materialNotice" role="status"></div></form>
 <div class="section-head"><h2>ფაილის პირდაპირ ატვირთვა</h2></div>
-<p class="muted">ატვირთე PDF, Word, PowerPoint, Excel ან TXT ფაილი. ფაილები შეინახება Cloudflare R2-ში (Worker-ში FILES binding აუცილებელია).</p>
+<p class="muted">ატვირთე PDF, Word, PowerPoint, Excel ან TXT ფაილი. ფაილები ინახება შენს არსებულ Cloudflare D1 მონაცემთა ბაზაში. R2 binding არ არის საჭირო.</p>
 <form id="fileUploadForm" class="material-form"><label>ფაილის სათაური<input name="title" required maxlength="160" placeholder="მასალის სათაური"></label><label>ფაილის არჩევა<input name="file" type="file" required accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt"></label><label>აღწერა<textarea name="description" maxlength="500" placeholder="მოკლე აღწერა"></textarea></label><button class="primary" type="submit">ფაილის ატვირთვა ↑</button><div class="notice" id="fileUploadNotice" role="status"></div></form>
 <div class="section-head"><h2>ქვიზის შექმნა</h2></div>
 <p class="muted">კითხვები JSON ფორმატით შეიყვანე. სწორი პასუხის ინდექსი იწყება 0-დან.</p>
