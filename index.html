@@ -102,8 +102,9 @@
 
       <button class="secondary" id="logoutBtn">გასვლა</button>
 
-      <h3>მასალები</h3>
-      <div id="materials" class="materials"></div>
+      <div class="library-head"><div><p class="library-kicker">STUDIA LIBRARY</p><h3>სასწავლო ბიბლიოთეკა</h3><p class="muted">მოძებნე მასალა სათაურით ან გაფილტრე კატეგორიის მიხედვით.</p></div><span class="library-count" id="libraryCount">0 მასალა</span></div>
+      <div class="library-tools"><label class="library-search"><span>⌕</span><input id="studySearch" type="search" placeholder="მოძებნე კონსპექტი, თემა, ფაილი..."></label><select id="studyCategory" aria-label="კატეგორიის არჩევა"><option value="">ყველა კატეგორია</option></select></div>
+      <div id="studyLibrary" class="materials library-grid"></div>
     </section>
 
   </section>
