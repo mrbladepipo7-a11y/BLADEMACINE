@@ -7,3 +7,7 @@ CREATE TABLE IF NOT EXISTS quiz_attempts (id TEXT PRIMARY KEY,quiz_id TEXT NOT N
 CREATE INDEX IF NOT EXISTS idx_quiz_attempts_user ON quiz_attempts(user_id,created_at);
 CREATE TABLE IF NOT EXISTS dashboard_rows (id TEXT PRIMARY KEY,user_id TEXT NOT NULL,subject TEXT NOT NULL,goal TEXT NOT NULL,status TEXT NOT NULL DEFAULT 'planned',created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
 CREATE INDEX IF NOT EXISTS idx_dashboard_rows_user ON dashboard_rows(user_id,created_at);
+
+-- Run this category migration once after the initial schema has been created.
+ALTER TABLE materials ADD COLUMN category TEXT NOT NULL DEFAULT 'სხვა';
+ALTER TABLE study_files ADD COLUMN category TEXT NOT NULL DEFAULT 'სხვა';
