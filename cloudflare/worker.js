@@ -80,14 +80,14 @@ export default {async fetch(req,env){
 
   if(p==="/api/materials"&&req.method==="GET"){
    const session=await student(req,env);if(!session)return fail("მასალების სანახავად ჯერ უნდა შეხვიდე დამტკიცებული ანგარიშით.",401);
-   const rows=await env.DB.prepare("SELECT id,title,url,description,created_at FROM materials ORDER BY created_at DESC").all();
+   const rows=await env.DB.prepare("SELECT id,title,url,description,category,created_at FROM materials ORDER BY created_at DESC").all();
    return json({materials:rows.results||[]})
   }
 
   // Private uploaded files: only approved users can list or view them.
   if(p==="/api/files"&&req.method==="GET"){
    const session=await student(req,env);if(!session)return fail("მასალების სანახავად ჯერ უნდა შეხვიდე დამტკიცებული ანგარიშით.",401);
-   const rows=await env.DB.prepare("SELECT id,title,description,original_name,content_type,size_bytes,created_at FROM study_files ORDER BY created_at DESC").all();
+   const rows=await env.DB.prepare("SELECT id,title,description,category,original_name,content_type,size_bytes,created_at FROM study_files ORDER BY created_at DESC").all();
    return json({files:rows.results||[]});
   }
   if(p==="/api/file"&&req.method==="GET"){
@@ -107,8 +107,8 @@ export default {async fetch(req,env){
    if(p==="/api/admin/overview"&&req.method==="GET"){
     const [users,materials,files]=await Promise.all([
      env.DB.prepare("SELECT id,first_name,last_name,email,status,created_at FROM users ORDER BY created_at DESC").all(),
-     env.DB.prepare("SELECT id,title,url,description,created_at FROM materials ORDER BY created_at DESC").all(),
-     env.DB.prepare("SELECT id,title,description,original_name,content_type,size_bytes,created_at FROM study_files ORDER BY created_at DESC").all()
+     env.DB.prepare("SELECT id,title,url,description,category,created_at FROM materials ORDER BY created_at DESC").all(),
+     env.DB.prepare("SELECT id,title,description,category,original_name,content_type,size_bytes,created_at FROM study_files ORDER BY created_at DESC").all()
     ]);
     const us=users.results||[],ms=materials.results||[];
     return json({counts:{pending:us.filter(x=>x.status==="pending").length,approved:us.filter(x=>x.status==="approved").length,rejected:us.filter(x=>x.status==="rejected").length},requests:us.map(cleanUser),materials:ms,files:files.results||[]})
@@ -118,24 +118,24 @@ export default {async fetch(req,env){
     const r=await env.DB.prepare("UPDATE users SET status=? WHERE id=?").bind(b.status,b.id).run();if(!r.meta.changes)return fail("მომხმარებელი ვერ მოიძებნა.",404);return json({ok:true})
    }
    if(p==="/api/admin/material-add"&&req.method==="POST"){
-    const b=await body(req),title=String(b?.title||"").trim(),link=String(b?.url||"").trim(),description=String(b?.description||"").trim();
-    if(!title||title.length>160||!safeUrl(link)||link.length>1000||description.length>500)return fail("შეამოწმე სათაური, ბმული და აღწერა.");
-    await env.DB.prepare("INSERT INTO materials(id,title,url,description) VALUES(?,?,?,?)").bind(uuid(),title,link,description).run();return json({ok:true},201)
+    const b=await body(req),title=String(b?.title||"").trim(),link=String(b?.url||"").trim(),description=String(b?.description||"").trim(),category=String(b?.category||"სხვა").trim();
+    if(!title||title.length>160||!safeUrl(link)||link.length>1000||description.length>500||category.length>60)return fail("შეამოწმე სათაური, კატეგორია, ბმული და აღწერა.");
+    await env.DB.prepare("INSERT INTO materials(id,title,url,description,category) VALUES(?,?,?,?,?)").bind(uuid(),title,link,description,category).run();return json({ok:true},201)
    }
    if(p==="/api/admin/material-delete"&&req.method==="POST"){
     const b=await body(req);if(!b?.id)return fail("მასალის ID აკლია.");await env.DB.prepare("DELETE FROM materials WHERE id=?").bind(b.id).run();return json({ok:true})
    }
    if(p==="/api/admin/file-upload"&&req.method==="POST"){
-    const form=await req.formData(),file=form.get("file"),title=String(form.get("title")||"").trim(),description=String(form.get("description")||"").trim();
+    const form=await req.formData(),file=form.get("file"),title=String(form.get("title")||"").trim(),description=String(form.get("description")||"").trim(),category=String(form.get("category")||"სხვა").trim();
     if(!file||typeof file.arrayBuffer!=="function"||!file.size)return fail("აირჩიე ფაილი.");
-    if(!title||title.length>160||description.length>500)return fail("შეამოწმე სათაური და აღწერა.");
+    if(!title||title.length>160||description.length>500||category.length>60)return fail("შეამოწმე სათაური, კატეგორია და აღწერა.");
     if(file.size>20*1024*1024)return fail("ფაილის მაქსიმალური ზომაა 20 MB.",413);
     const extension=extOf(file.name),contentType=allowedFiles.get(extension);
     if(!contentType)return fail("ამ ტიპის ფაილი დაშვებული არ არის.");
     const bytes=new Uint8Array(await file.arrayBuffer()),id=uuid();
     // Keep each D1 BLOB below 2 MB. Upload is stored privately in the existing D1 database.
     const chunkSize=1536*1024,statements=[];
-    statements.push(env.DB.prepare("INSERT INTO study_files(id,title,description,object_key,original_name,content_type,size_bytes) VALUES(?,?,?,?,?,?,?)").bind(id,title,description,id,safeFilename(file.name),contentType,bytes.length));
+    statements.push(env.DB.prepare("INSERT INTO study_files(id,title,description,category,object_key,original_name,content_type,size_bytes) VALUES(?,?,?,?,?,?,?,?)").bind(id,title,description,category,id,safeFilename(file.name),contentType,bytes.length));
     for(let offset=0,index=0;offset<bytes.length;offset+=chunkSize,index++){
      const chunk=bytes.slice(offset,Math.min(offset+chunkSize,bytes.length));
      statements.push(env.DB.prepare("INSERT INTO study_file_chunks(file_id,chunk_index,data) VALUES(?,?,?)").bind(id,index,chunk));
