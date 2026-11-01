@@ -28,3 +28,7 @@ D1 limits: each BLOB/row is limited to 2,000,000 bytes, so chunk files below tha
 
 ## Migration
 Run schema-additions.sql on the existing D1 database. It only creates new tables and leaves users, sessions, and materials untouched.
+
+
+## Study-library categories
+After the initial `schema-additions.sql` has been executed, run `category-migration.sql` exactly once in the same D1 database. It adds a category column to existing link materials and uploaded files. The admin forms then save categories, and the student library supports title/description search plus category filtering.
